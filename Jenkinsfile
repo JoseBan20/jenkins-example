@@ -27,6 +27,13 @@ pipeline {
                     bat 'mvn deploy'
                 }
             }
+            
+             stage ('sonar Stage') {
+            steps {
+                withMaven(maven : 'MAVEN_HOME') {
+                    bat 'mvn zap'
+                }
+            }
         }
     }
 }
