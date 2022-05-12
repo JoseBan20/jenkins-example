@@ -27,8 +27,16 @@ pipeline {
                     bat 'mvn deploy'
                 }
             }
-            
-       
+               
         }
+           stage ('zap Stage') {
+            steps {
+                withMaven(maven : 'MAVEN_HOME') {
+                    bat 'mvn zap'
+                }
+            }
+               
+        }
+        
     }
 }
