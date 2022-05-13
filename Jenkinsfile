@@ -21,11 +21,11 @@ pipeline {
         }
 
 
-           stage ('zap Stage') {
+            stage ('Deployment Stage') {
+
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn zap'
-                    IF %ERRORLEVEL% EQU 1 (exit /B 0) ELSE (exit /B 1)
+                    bat 'mvn deploy'
                 }
             }
                
