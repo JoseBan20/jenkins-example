@@ -1,30 +1,28 @@
+27 lines (27 sloc)  779 Bytes
+   
 pipeline {
     agent any
-
     stages {
-        stage ('Compile Stage') {
-
+        stage('git repo & clean') {
             steps {
-                withMaven(maven : 'MAVEN_HOME') {
-                   bat 'mvn clean compile'
-                }
+              // bat "rmdir  /s /q TicketBookingServiceJunitTesting"
+                bat "git clone https://github.com/kishancs2020/TicketBookingServiceJunitTesting.git"
+                bat "mvn clean -f TicketBookingServiceJunitTesting"
             }
         }
-
-        stage ('Testing Stage') {
-
+        stage('install') {
             steps {
-                withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn test'
-                }
+                bat "mvn install -f TicketBookingServiceJunitTesting"
             }
         }
-
-      stage ('Deployment Stage') {
+        stage('test') {
             steps {
-                withMaven(maven : 'MAVEN_HOME') {
-                   bat 'mvn deploy'
-                }
+                bat "mvn test -f TicketBookingServiceJunitTesting"
+            }
+        }
+        stage('package') {
+            steps {
+                bat "mvn package -f TicketBookingServiceJunitTesting"
             }
         }
     }
