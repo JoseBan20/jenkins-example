@@ -21,7 +21,7 @@ pipeline {
         }
 
 
-            stage ('Deployment Stage') {
+            stage ('deploy') {
 
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
