@@ -20,16 +20,12 @@ pipeline {
             }
         }
 
-
-            stage ('deploy') {
-
+      stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
-                    bat 'mvn deploy'
+                    sh 'mvn deploy'
                 }
             }
-               
         }
-        
     }
 }
